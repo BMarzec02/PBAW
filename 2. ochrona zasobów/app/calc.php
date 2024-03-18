@@ -36,7 +36,7 @@ function validate(&$kwota,&$lat,&$oprocentowanie,&$messages){
         $messages [] = 'Druga wartość nie jest liczbą całkowitą';
     }
 
-    if (! is_float( $oprocentowanie )) {
+    if (! is_numeric( $oprocentowanie )) {
         $messages [] = 'Trzecia wartość nie jest liczbą dziesiętną';
     }
 
@@ -52,7 +52,7 @@ function process(&$kwota, &$lat, &$oprocentowanie, &$messages, &$result){
     $oprocentowanie = floatval($oprocentowanie);
 
     if ($kwota > 10000 && $role != 'admin') {
-        $messages[] = 'Aby skorzystać z kredytu większego od 10 000zł skorzystaj z pomocy pracownika banku';
+        $messages[] = 'Aby obliczyć ratę kredytu dla kwoty większej od 10 000 zł, wymagana jest rola administratora';
     } else {
         $result = number_format(($kwota * ($oprocentowanie/100) + $kwota) / ($lat * 12), 2, '.', '');
     }
@@ -67,7 +67,7 @@ $messages = array();
 
 getParams($kwota,$lat,$oprocentowanie);
 if ( validate($kwota,$lat,$oprocentowanie,$messages) ) {
-    process($oprocentowanie,$lat,$oprocentowanie,$messages,$result);
+    process($kwota,$lat,$oprocentowanie,$messages,$result);
 }
 
 include 'calc_view.php';

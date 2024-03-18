@@ -10,4 +10,3 @@ function out(&$param){
 		echo $param;
 	}
 }
-?>
