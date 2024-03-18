@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<div style="width:90%; margin: 2em auto;">
+<div style="width: fit-content; margin: auto; text-align: center">
 
 <form action="<?php print(_APP_ROOT); ?>/app/security/login.php" method="post" class="pure-form pure-form-stacked">
 	<legend>Logowanie</legend>
@@ -19,9 +19,10 @@
 	</fieldset>
 	<input type="submit" value="zaloguj" class="pure-button pure-button-primary"/>
 </form>	
+</div>
 
+<div style="width: fit-content; margin: 0 auto;">
 <?php
-//wyświeltenie listy błędów, jeśli istnieją
 if (isset($messages)) {
 	if (count ( $messages ) > 0) {
 		echo '<ol style="padding: 10px 10px 10px 30px; border-radius: 5px; background-color: #f88; width:300px;">';
@@ -34,6 +35,5 @@ if (isset($messages)) {
 ?>
 
 </div>
-
 </body>
 </html>
