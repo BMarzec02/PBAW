@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c0932bc8-6c2b-40a9-aa5c-91aed726cb59" name="Changes" comment="commit" />
+    <list default="true" id="c0932bc8-6c2b-40a9-aa5c-91aed726cb59" name="Changes" comment="commit">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2. ochrona zasobów/app/calc.php" beforeDir="false" afterPath="$PROJECT_DIR$/2. ochrona zasobów/app/calc.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2. ochrona zasobów/app/calc_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/2. ochrona zasobów/app/calc_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2. ochrona zasobów/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/2. ochrona zasobów/config.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -30,6 +35,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "C:/xampp/htdocs/PBAW",
     "node.js.detected.package.eslint": "true",
@@ -64,6 +70,7 @@
       <workItem from="1710165621361" duration="131000" />
       <workItem from="1710165763994" duration="309000" />
       <workItem from="1710788052615" duration="263000" />
+      <workItem from="1710788435371" duration="874000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -105,7 +112,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710788158593</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="commit">
+      <option name="closed" value="true" />
+      <created>1710788454574</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1710788454574</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
