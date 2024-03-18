@@ -45,7 +45,9 @@
 
     <?php if (isset($result)){ ?>
         <div style="margin-top: 1em; padding: 1em; border-radius: 0.5em; background-color: #ff0; width:25em;">
-            <?php echo 'Wynik: '.$result.' zł'; ?>
+            <?php   echo 'Kwota kredytu wynosi: '.$result.' zł'."<br/>";
+                    echo 'Czas spłaty '.($years*12).' miesięcy.';
+            ?>
         </div>
     <?php } ?>
 

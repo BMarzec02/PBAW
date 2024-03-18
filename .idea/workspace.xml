@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c0932bc8-6c2b-40a9-aa5c-91aed726cb59" name="Changes" comment="commit">
+    <list default="true" id="c0932bc8-6c2b-40a9-aa5c-91aed726cb59" name="Changes" comment="ang nazwy zmiennych">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2. ochrona zasobów/app/calc.php" beforeDir="false" afterPath="$PROJECT_DIR$/2. ochrona zasobów/app/calc.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/2. ochrona zasobów/app/calc_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/2. ochrona zasobów/app/calc_view.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -70,7 +69,7 @@
       <workItem from="1710165621361" duration="131000" />
       <workItem from="1710165763994" duration="309000" />
       <workItem from="1710788052615" duration="263000" />
-      <workItem from="1710788435371" duration="3057000" />
+      <workItem from="1710788435371" duration="3579000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -144,7 +143,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710791068905</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="ang nazwy zmiennych">
+      <option name="closed" value="true" />
+      <created>1710791520488</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1710791520488</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -154,6 +161,7 @@
     <MESSAGE value="first commit" />
     <MESSAGE value="ostateczna ver" />
     <MESSAGE value="commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit" />
+    <MESSAGE value="ang nazwy zmiennych" />
+    <option name="LAST_COMMIT_MESSAGE" value="ang nazwy zmiennych" />
   </component>
 </project>
