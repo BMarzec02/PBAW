@@ -10,7 +10,6 @@ function getParams(&$kwota,&$lat,&$oprocentowanie){
 }
 
 function validate(&$kwota,&$lat,&$oprocentowanie,&$messages){
-    // sprawdzenie, czy parametry zostały przekazane
     if ( ! (isset($kwota) && isset($lat) && isset($oprocentowanie))) {
         return false;
     }
@@ -27,10 +26,8 @@ function validate(&$kwota,&$lat,&$oprocentowanie,&$messages){
         $messages [] = 'Nie podano oprocentowania';
     }
 
-    //nie ma sensu walidować dalej gdy brak parametrów
     if (count ( $messages ) != 0) return false;
 
-    // sprawdzenie, czy $x i $y są liczbami całkowitymi
     if (! is_numeric( $kwota )) {
         $messages [] = 'Pierwsza wartość nie jest liczbą całkowitą';
     }
@@ -39,7 +36,7 @@ function validate(&$kwota,&$lat,&$oprocentowanie,&$messages){
         $messages [] = 'Druga wartość nie jest liczbą całkowitą';
     }
 
-    if (! is_numeric( $oprocentowanie )) {
+    if (! is_float( $oprocentowanie )) {
         $messages [] = 'Trzecia wartość nie jest liczbą dziesiętną';
     }
 
@@ -47,15 +44,20 @@ function validate(&$kwota,&$lat,&$oprocentowanie,&$messages){
     else return true;
 }
 
-function process(&$kwota,&$lat,&$oprocentowanie,&$messages,&$result){
+function process(&$kwota, &$lat, &$oprocentowanie, &$messages, &$result){
     global $role;
 
     $kwota = intval($kwota);
     $lat = intval($lat);
     $oprocentowanie = floatval($oprocentowanie);
 
-    $result = number_format(($kwota * ($oprocentowanie/100) + $kwota) / ($lat * 12), 2, '.', '');
+    if ($kwota > 10000 && $role != 'admin') {
+        $messages[] = 'Aby skorzystać z kredytu większego od 10 000zł skorzystaj z pomocy pracownika banku';
+    } else {
+        $result = number_format(($kwota * ($oprocentowanie/100) + $kwota) / ($lat * 12), 2, '.', '');
+    }
 }
+
 
 $kwota = null;
 $lat = null;
