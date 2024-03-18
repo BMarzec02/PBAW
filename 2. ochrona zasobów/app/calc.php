@@ -3,40 +3,39 @@ require_once dirname(__FILE__).'/../config.php';
 
 include _ROOT_PATH.'/app/security/check.php';
 
-function getParams(&$kwota,&$lat,&$oprocentowanie){
-    $kwota = isset($_REQUEST['kwota']) ? $_REQUEST['kwota'] : null;
-    $lat = isset($_REQUEST['lat']) ? $_REQUEST['lat'] : null;
-    $oprocentowanie = isset($_REQUEST['oprocentowanie']) ? $_REQUEST['oprocentowanie'] : null;
+function getParams(&$amount,&$years,&$apr){
+    $amount = isset($_REQUEST['amount']) ? $_REQUEST['amount'] : null;
+    $years = isset($_REQUEST['years']) ? $_REQUEST['years'] : null;
+    $apr = isset($_REQUEST['apr']) ? $_REQUEST['apr'] : null;
 }
 
-function validate(&$kwota,&$lat,&$oprocentowanie,&$messages){
-    if ( ! (isset($kwota) && isset($lat) && isset($oprocentowanie))) {
+function validate(&$amount,&$years,&$apr,&$messages){
+    if ( ! (isset($amount) && isset($years) && isset($apr))) {
         return false;
     }
 
-    // sprawdzenie, czy potrzebne wartości zostały przekazane
-    if ( $kwota == "") {
+    if ( $amount == "") {
         $messages [] = 'Nie podano kwoty';
     }
-    if ( $lat == "") {
+    if ( $years == "") {
         $messages [] = 'Nie podano liczby lat';
     }
 
-    if ( $oprocentowanie == "") {
+    if ( $apr == "") {
         $messages [] = 'Nie podano oprocentowania';
     }
 
     if (count ( $messages ) != 0) return false;
 
-    if (! is_numeric( $kwota )) {
+    if (! is_numeric( $amount )) {
         $messages [] = 'Pierwsza wartość nie jest liczbą całkowitą';
     }
 
-    if (! is_numeric( $lat )) {
+    if (! is_numeric( $years )) {
         $messages [] = 'Druga wartość nie jest liczbą całkowitą';
     }
 
-    if (! is_numeric( $oprocentowanie )) {
+    if (! is_numeric( $apr )) {
         $messages [] = 'Trzecia wartość nie jest liczbą dziesiętną';
     }
 
@@ -44,30 +43,30 @@ function validate(&$kwota,&$lat,&$oprocentowanie,&$messages){
     else return true;
 }
 
-function process(&$kwota, &$lat, &$oprocentowanie, &$messages, &$result){
+function process(&$amount, &$years, &$apr, &$messages, &$result){
     global $role;
 
-    $kwota = intval($kwota);
-    $lat = intval($lat);
-    $oprocentowanie = floatval($oprocentowanie);
+    $amount = intval($amount);
+    $years = intval($years);
+    $apr = floatval($apr);
 
-    if ($kwota > 10000 && $role != 'admin') {
+    if ($amount > 10000 && $role != 'admin') {
         $messages[] = 'Aby obliczyć ratę kredytu dla kwoty większej od 10 000 zł, wymagana jest rola administratora';
     } else {
-        $result = number_format(($kwota * ($oprocentowanie/100) + $kwota) / ($lat * 12), 2, '.', '');
+        $result = number_format(($amount * ($apr/100) + $amount) / ($years * 12), 2, '.', '');
     }
 }
 
 
-$kwota = null;
-$lat = null;
-$oprocentowanie = null;
+$amount = null;
+$years = null;
+$apr = null;
 $result = null;
 $messages = array();
 
-getParams($kwota,$lat,$oprocentowanie);
-if ( validate($kwota,$lat,$oprocentowanie,$messages) ) {
-    process($kwota,$lat,$oprocentowanie,$messages,$result);
+getParams($amount,$years,$apr);
+if ( validate($amount,$years,$apr,$messages) ) {
+    process($amount,$years,$apr,$messages,$result);
 }
 
 include 'calc_view.php';

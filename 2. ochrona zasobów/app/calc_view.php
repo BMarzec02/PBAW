@@ -18,14 +18,14 @@
     <form action="<?php print(_APP_URL);?>/app/calc.php" method="post" class="pure-form pure-form-stacked">
         <legend>Kalkulator Kredytowy</legend>
         <fieldset>
-            <label for="id_kwota">Kwota kredytu:</label>
-            <input id="id_kwota" type="text" name="kwota" value="<?php out($kwota); ?>" /><br/>
+            <label for="id_amount">Kwota kredytu:</label>
+            <input id="id_amount" type="text" name="amount" value="<?php out($amount); ?>" /><br/>
 
-            <label for="id_lat">Okres spłaty (lat):</label>
-            <input id="id_lat" type="text" name="lat" value="<?php out($lat); ?>" /><br/>
+            <label for="id_years">Okres spłaty (lat):</label>
+            <input id="id_years" type="text" name="years" value="<?php out($years); ?>" /><br/>
 
-            <label for="id_oprocentowanie">Wprowadź oprocentowanie kredytu w %</label>
-            <input id="id_oprocentowanie" type="text" name="oprocentowanie" value="<?php out($oprocentowanie); ?>" /><br/>
+            <label for="id_apr">Wprowadź oprocentowanie kredytu w %</label>
+            <input id="id_apr" type="text" name="apr" value="<?php out($apr); ?>" /><br/>
 
             <input type="submit" value="Oblicz" />
         </fieldset>
@@ -45,7 +45,7 @@
 
     <?php if (isset($result)){ ?>
         <div style="margin-top: 1em; padding: 1em; border-radius: 0.5em; background-color: #ff0; width:25em;">
-            <?php echo 'Wynik: '.$result; ?>
+            <?php echo 'Wynik: '.$result.' zł'; ?>
         </div>
     <?php } ?>
 
