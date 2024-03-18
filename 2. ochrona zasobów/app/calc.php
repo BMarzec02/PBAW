@@ -11,81 +11,88 @@ require_once dirname(__FILE__).'/../config.php';
 include _ROOT_PATH.'/app/security/check.php';
 
 //pobranie parametrów
-function getParams(&$kwota,&$lat,&$oprocentowanie){
-	$kwota = isset($_REQUEST['kwota']) ? $_REQUEST['kwota'] : null;
-	$lat = isset($_REQUEST['lat']) ? $_REQUEST['lat'] : null;
-	$oprocentowanie = isset($_REQUEST['oprocentowanie']) ? $_REQUEST['oprocentowanie'] : null;	
+function getParams(&$x,&$y,&$operation){
+	$x = isset($_REQUEST['x']) ? $_REQUEST['x'] : null;
+	$y = isset($_REQUEST['y']) ? $_REQUEST['y'] : null;
+	$operation = isset($_REQUEST['op']) ? $_REQUEST['op'] : null;	
 }
 
 //walidacja parametrów z przygotowaniem zmiennych dla widoku
-function validate(&$kwota,&$lat,&$oprocentowanie,&$messages){
+function validate(&$x,&$y,&$operation,&$messages){
 	// sprawdzenie, czy parametry zostały przekazane
-	if ( ! (isset($kwota) && isset($lat) && isset($oprocentowanie))) {
+	if ( ! (isset($x) && isset($y) && isset($operation))) {
 		// sytuacja wystąpi kiedy np. kontroler zostanie wywołany bezpośrednio - nie z formularza
 		// teraz zakładamy, ze nie jest to błąd. Po prostu nie wykonamy obliczeń
 		return false;
 	}
 
 	// sprawdzenie, czy potrzebne wartości zostały przekazane
-	if ( $kwota == "") {
-		$messages [] = 'Nie podano kwoty';
+	if ( $x == "") {
+		$messages [] = 'Nie podano liczby 1';
 	}
-	if ( $lat == "") {
-		$messages [] = 'Nie podano liczby lat';
-	}
-	
-	if ( $oprocentowanie == "") {
-		$messages [] = 'Nie podano oprocentowania';
+	if ( $y == "") {
+		$messages [] = 'Nie podano liczby 2';
 	}
 
 	//nie ma sensu walidować dalej gdy brak parametrów
 	if (count ( $messages ) != 0) return false;
 	
 	// sprawdzenie, czy $x i $y są liczbami całkowitymi
-	if (! is_numeric( $kwota )) {
+	if (! is_numeric( $x )) {
 		$messages [] = 'Pierwsza wartość nie jest liczbą całkowitą';
 	}
 	
-	if (! is_numeric( $lat )) {
+	if (! is_numeric( $y )) {
 		$messages [] = 'Druga wartość nie jest liczbą całkowitą';
-	}	
-	
-	if (! is_numeric( $oprocentowanie )) {
-		$messages [] = 'Trzecia wartość nie jest liczbą dziesiętną';
 	}	
 
 	if (count ( $messages ) != 0) return false;
 	else return true;
 }
 
-function process(&$kwota,&$lat,&$oprocentowanie,&$messages,&$result){
+function process(&$x,&$y,&$operation,&$messages,&$result){
 	global $role;
-
-	$kwota = intval($kwota);
-	$lat = intval($lat);
-    $oprocentowanie = floatval($oprocentowanie);
-
-	if($role == 'user' & $kwota > 1000){
-		$messages [] =  !';
-	}
-	else{
-		$result = number_format(($kwota * ($oprocentowanie/100) + $kwota) / ($lat * 12), 2, '.', '');
-
-	}
 	
+	//konwersja parametrów na int
+	$x = intval($x);
+	$y = intval($y);
+	
+	//wykonanie operacji
+	switch ($operation) {
+		case 'minus' :
+			if ($role == 'admin'){
+				$result = $x - $y;
+			} else {
+				$messages [] = 'Tylko administrator może odejmować !';
+			}
+			break;
+		case 'times' :
+			$result = $x * $y;
+			break;
+		case 'div' :
+			if ($role == 'admin'){
+				$result = $x / $y;
+			} else {
+				$messages [] = 'Tylko administrator może dzielić !';
+			}
+			break;
+		default :
+			$result = $x + $y;
+			break;
+	}
 }
 
 //definicja zmiennych kontrolera
-$kwota = null;
-$lat = null;
-$oprocentowanie = null;
+$x = null;
+$y = null;
+$operation = null;
 $result = null;
 $messages = array();
 
 //pobierz parametry i wykonaj zadanie jeśli wszystko w porządku
-getParams($kwota,$lat,$oprocentowanie);
-if ( validate($kwota,$lat,$oprocentowanie,$messages) ) { // gdy brak błędów
-	process($oprocentowanie,$lat,$oprocentowanie,$messages,$result);
+getParams($x,$y,$operation);
+if ( validate($x,$y,$operation,$messages) ) { // gdy brak błędów
+	process($x,$y,$operation,$messages,$result);
 }
 
 // Wywołanie widoku z przekazaniem zmiennych
